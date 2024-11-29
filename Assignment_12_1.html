@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalized Greeting</title>
+
+    <!--CSS for the layout and design -->
+    <style>
+        body {
+            background-color: #E3F2FD; /* Soft blue background */
+            font-family: 'Arial', sans-serif; /* Simple, clean font */
+            color: #000000;  /* Blue text color */
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #BBDEFB; /* Light blue container */
+            border-radius: 10px;
+            width: 70%;
+            max-width: 600px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #1E88E5;
+            font-size: 2.5em;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #0ca89b;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #0277BD;
+        }
+
+        .output {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #1976D2;
+        }
+
+        .error {
+            color: #D32F2F;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--Users interface -->
+    <div class="container">
+        <h1>Welcome to Your Personalized Greeting!</h1>
+        
+        <!-- Button to trigger JavaScript function -->
+        <button onclick="getPersonalizedGreeting()">Click to Enter Your Name</button>
+
+        <!-- Output will be displayed here -->
+        <div id="outputArea" class="output"></div>
+
+        <!-- Cute Fox image -->
+        <img src="cute fox.jpg" alt="Cute Fox">
+    </div>
+
+    <script>
+        //The main function to handle the personalized greeting
+        function getPersonalizedGreeting() {
+            const userName = prompt("Please enter your name:");
+
+            if (userName === null || userName.trim() === "") {
+                document.getElementById("outputArea").innerHTML = "<div class='error'>Please enter a valid name!</div>";
+                return;
+            }
+            const greeting = new Greeting(userName);
+
+            const result = greeting.generateGreeting();
+            document.getElementById("outputArea").innerHTML = result;
+        }
+
+        //greeting logic based on the user's input
+        class Greeting {
+            constructor(name) {
+                this.name = name;
+            }
+
+            //Function to generate greeting message
+            generateGreeting() {
+                if (this.name.length < 3) {
+                    return `Hello, ${this.name}! Wow, that's a short name!`;
+                } else if (this.name.length > 9) {
+                    return `Hello, ${this.name}! Your name is quite long!`;
+                } else {
+                    return this.normalGreeting();
+                }
+            }
+
+            //Standard greeting if name length is neither too short nor too long
+            normalGreeting() {
+                let message = `Hello, ${this.name}! Welcome to the website.`;
+
+                // Adding a custom greeting based on the person first letter in the name
+                const firstLetter = this.name.charAt(0).toLowerCase();
+                switch(firstLetter) {
+                    case 'a': message += " A for Amazing!"; break;
+                    case 'b': message += " B for Brilliant!"; break;
+                    case 'c': message += " C for Creative!"; break;
+                    case 'd': message += " D for Dynamic!"; break;
+                    case 'e': message += " E for Excellent!"; break;
+                    case 'f': message += " F for Fabulous!"; break;
+                    case 'g': message += " G for Gracious!"; break;
+                    case 'h': message += " H for Happy!"; break;
+                    case 'i': message += " I for Incredible!"; break;
+                    case 'j': message += " J for Joyful!"; break;
+                    case 'k': message += " K for Knowledgeable!"; break;
+                    case 'l': message += " L for Lovely!"; break;
+                    case 'm': message += " M for Magnificent!"; break;
+                    case 'n': message += " N for Noble!"; break;
+                    case 'o': message += " O for Outstanding!"; break;
+                    case 'p': message += " P for Phenomenal!"; break;
+                    case 'q': message += " Q for Quick-witted!"; break;
+                    case 'r': message += " R for Radiant!"; break;
+                    case 's': message += " S for Sensational!"; break;
+                    case 't': message += " T for Talented!"; break;
+                    case 'u': message += " U for Unique!"; break;
+                    case 'v': message += " V for Vibrant!"; break;
+                    case 'w': message += " W for Wonderful!"; break;
+                    case 'x': message += " X for X-fact!"; break;
+                    case 'y': message += " Y for Youthful!"; break;
+                    case 'z': message += " Z for Zealous!"; break;
+                    default: message += " Your name starts with an interesting letter!"; break;
+                }
+
+                //Adding a fun little breakdown of the name's characters
+                message += "<br><br>Your name contains the following letters: ";
+                for (let i = 0; i < this.name.length; i++) {
+                    message += `<span style='font-weight:bold;'>${this.name[i]}</span> `;
+                }
+
+                return message;
+            }
+        }
+    </script>
+
+</body>
+</html>
